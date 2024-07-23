@@ -1,6 +1,6 @@
 mod utils;
 mod routes;
-mod ejecutor;
+mod runner;
 
 use axum::{routing, Router};
 
@@ -10,7 +10,7 @@ const HEAP_LIMITS: (usize, usize) = (1000000, 2000000);
 
 #[tokio::main]
 async fn main() {
-	ejecutor::init_ejecutor();
+	runner::init_ejecutor();
 	tracing_subscriber::fmt::init();
 
 	let app = Router::new()

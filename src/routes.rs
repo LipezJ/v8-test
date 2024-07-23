@@ -3,7 +3,7 @@ use serde::Deserialize;
 use axum::extract::Query;
 use serde_json::{json, Value};
 
-use crate::{ejecutor, TIMEOUT};
+use crate::{runner, TIMEOUT};
 use crate::utils::empty_string_as_none;
 
 #[derive(Debug, Deserialize)]
@@ -27,7 +27,7 @@ pub async fn runner(Query(params): Query<FunctionParams>) -> Json<Value> {
 
 	let args = params.args.unwrap_or("{}".to_string());
 
-	match ejecutor::run(code, args, TIMEOUT) {
+	match runner::run(code, args, TIMEOUT) {
 		Ok(value) => Json(json!(value)),
 		Err(error) => Json(json!({ "error": error }))
 	}
